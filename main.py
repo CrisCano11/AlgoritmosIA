@@ -6,7 +6,7 @@ Created on Thu Mar 10 22:13:33 2022
 """
 
 import matplotlib.pyplot as plt
-
+from genetico import *
 
 canas = 0
 canasta = 0
@@ -86,7 +86,28 @@ def Difuso():
     plt.title(title)
     plt.show()
 
-
+def Dinamico():
+  global arrProductos
+  global cantCosto
+  global canasta
+  global bprima
+  global cantProducto
+  seguir = Parametros()
+  dp = [[0 for x in range(canasta+1)] for x in range(cantProducto)]
+  if seguir:
+      
+      for i in range(cantProducto):
+          for j in range(canasta +1):
+            print(dp)
+            if i==0 or j==0:
+                dp[i][j]=0
+            elif arrProductos[i-1]['peso'] <= j:
+                dp[i][j] = max(arrProductos[i - 1]['costo'] + dp[i - 1][j - arrProductos[i - 1]['peso']],dp[i - 1][j])
+                
+            else:
+                dp[i][j] = dp[i - 1][j]
+  print(cantProducto-1,canasta ,len(dp))          
+  return print(dp[cantProducto-1][canasta])
 
 opcion = int(input("Menu Principal \n Seleccione metodo de solución \n 1- Greddy - Goloso \n 2- Dinamico \n 3- Graficar conjunto difuso \n 4- Genetico \n 5- Tabu \n 0- Salir \n"))
 
