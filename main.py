@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 10 22:13:33 2022
-
-@author: crisc
-"""
-
 import matplotlib.pyplot as plt
+import random as rd
 from genetico import *
+from tabu import *
 
 canas = 0
 canasta = 0
@@ -72,20 +67,21 @@ def Goloso():
     print('Beneficio: ', cantCosto, " B': ", bprima)
     
 def Difuso():
-    esperado = int(input("Ingrese el valor de lo que usted espera\n"))
-    minimo  = int(input("Ingrese el valor minimo aceptado\n"))
-    title = input("Ingrese el nombre del grafico\n")
-    escala =input("Ingrese su cualidad\n")
-    variable = input("Ingrese su forma de medición\n")
-    
-    x= minimo,esperado
-    y= 0,1
-    plt.plot(x,y)
-    plt.xlabel(variable)
-    plt.ylabel(escala)
-    plt.title(title)
-    plt.show()
-
+	nucleo = int(input("Ingrese el valor donde Mu' = 1\n"))
+	alfa  = int(input("Ingrese el valor de Alfacut\n"))
+	title = input("Ingrese el nombre del grafico\n")
+	escala =input("Ingrese su cualidad\n")
+	variable = input("Ingrese su forma de medición\n")
+	puntoCruce = (nucleo + alfa) / 2
+	x= alfa,nucleo
+	y= 0,1
+	plt.plot(puntoCruce,0.5, marker="o", color="red")
+	plt.plot(x,y)
+	plt.xlabel(variable)
+	plt.ylabel(escala)
+	plt.title(title)
+	plt.show()
+  
 def Dinamico():
   global arrProductos
   global cantCosto
@@ -108,26 +104,29 @@ def Dinamico():
                 dp[i][j] = dp[i - 1][j]
   print(cantProducto-1,canasta ,len(dp))          
   return print(dp[cantProducto-1][canasta])
-
+    
 opcion = int(input("Menu Principal \n Seleccione metodo de solución \n 1- Greddy - Goloso \n 2- Dinamico \n 3- Graficar conjunto difuso \n 4- Genetico \n 5- Tabu \n 0- Salir \n"))
 
-while opcion != 0:
-    if opcion == 1:
-        Goloso()
-        
-    elif opcion == 2:
-        print("dos")
-        
-    elif opcion == 3:
-        Difuso()
-        
-    elif opcion == 4:
-        iterate()
-        
-    elif opcion == 5:
-        print ("cinco")
-        
-    else:
-        print("Ingrese una opcion valida")
-        
-    opcion = int(input("Menu Principal \n Seleccione metodo de solución \n 1- Greddy - Goloso \n 2- Dinamico \n 3- Graficar conjunto difuso \n 4- Genetico \n 5- Tabu \n 0- Salir \n"))
+
+
+
+
+if opcion == 1:
+		Goloso()
+		
+elif opcion == 2:
+		Dinamico()
+		
+elif opcion == 3:
+		Difuso()
+		
+elif opcion == 4:
+		iterate()
+		
+elif opcion == 5:
+		iteracion()
+		
+else:
+		print("Ingrese una opcion valida")
+		
+opcion = int(input("Menu Principal \n Seleccione metodo de solución \n 1- Greddy - Goloso \n 2- Dinamico \n 3- Graficar conjunto difuso \n 4- Genetico \n 5- Tabu \n 0- Salir \n"))
